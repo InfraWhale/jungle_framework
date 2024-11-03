@@ -1,16 +1,22 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/wk13
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://43.200.182.22:5432/security
+    username: cos
+    password: cos1234
+    driver-class-name: org.postgresql.Driver
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
 
   thymeleaf:
     cache: false
 
   jpa:
     hibernate:
-      ddl-auto: create
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update #update create update none
     properties:
       hibernate:
         # show_sql: true
