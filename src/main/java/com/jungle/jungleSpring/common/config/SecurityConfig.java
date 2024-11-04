@@ -86,6 +86,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                                 .requestMatchers(HttpMethod.POST, "/posting", "/posting/{id}").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/posting/{id}").authenticated()
+                                .requestMatchers("/comment/**").authenticated()
                                 .anyRequest().permitAll()
 //                        .requestMatchers("/login", "/", "/join").permitAll()
 //                        .requestMatchers("/admin").hasRole("ADMIN")

@@ -1,6 +1,6 @@
 package com.jungle.jungleSpring.Posting.service;
 
-import com.jungle.jungleSpring.Posting.dto.*;
+import com.jungle.jungleSpring.Posting.dto.posting.*;
 import com.jungle.jungleSpring.Posting.entity.Posting;
 import com.jungle.jungleSpring.Posting.repository.PostingRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class PostingService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
-    public addPostingResponseDto addPosting(addPostingRequestDto requestDto) {
+    public AddPostingResponseDto addPosting(AddPostingRequestDto requestDto) {
 
         String loginName = SecurityContextHolder.getContext().getAuthentication().getName();
         String bcryptedPassword = bCryptPasswordEncoder.encode(requestDto.getPassword());
@@ -33,29 +33,29 @@ public class PostingService {
         Posting posting = new Posting(requestDto, loginName, bcryptedPassword);
         Posting savedPosting = postingRepository.saveAndFlush(posting);
 
-        return new addPostingResponseDto(savedPosting);
+        return new AddPostingResponseDto(savedPosting);
     }
 
-    public List<getPostingResponseDto> getPostingAll() {
+    public List<GetPostingResponseDto> getPostingAll() {
 
         List<Posting> PostingList = postingRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
 
         return PostingList.stream()
-                .map(getPostingResponseDto::new)
+                .map(GetPostingResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-    public getPostingResponseDto getPostingById(Long id) {
+    public GetPostingResponseDto getPostingById(Long id) {
 
         Posting searchedPosting = postingRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 게시물입니다.")
         );
 
-        return new getPostingResponseDto(searchedPosting);
+        return new GetPostingResponseDto(searchedPosting);
     }
 
     @Transactional
-    public updatePostingResponseDto updatePosting(Long id, updatePostingRequestDto requestDto) {
+    public UpdatePostingResponseDto updatePosting(Long id, UpdatePostingRequestDto requestDto) {
 
         Posting searchedPosting = postingRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 게시물입니다.")
@@ -73,11 +73,11 @@ public class PostingService {
 
         searchedPosting.updatePosting(requestDto);
 
-        return new updatePostingResponseDto(searchedPosting);
+        return new UpdatePostingResponseDto(searchedPosting);
     }
 
     @Transactional
-    public String deletePosting(Long id, deletePostingRequestDto requestDto) {
+    public String deletePosting(Long id, DeletePostingRequestDto requestDto) {
 
         Posting searchedPosting = postingRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 게시물입니다.")

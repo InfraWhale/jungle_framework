@@ -1,6 +1,5 @@
 package com.jungle.jungleSpring;
 
-import com.jungle.jungleSpring.entity.QHello;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;

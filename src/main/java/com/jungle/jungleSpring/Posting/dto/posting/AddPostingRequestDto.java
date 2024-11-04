@@ -1,11 +1,9 @@
-package com.jungle.jungleSpring.Posting.dto;
+package com.jungle.jungleSpring.Posting.dto.posting;
 
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
-public class addPostingRequestDto {
+public class AddPostingRequestDto {
     private String title;
     private String author;
 

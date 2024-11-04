@@ -1,9 +1,9 @@
-package com.jungle.jungleSpring.Posting.dto;
+package com.jungle.jungleSpring.Posting.dto.posting;
 
 import lombok.Getter;
 
 @Getter
-public class updatePostingRequestDto {
+public class UpdatePostingRequestDto {
     private String title;
     private String content;
     private String author;
